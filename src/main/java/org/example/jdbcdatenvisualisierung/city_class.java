@@ -5,6 +5,7 @@ public class city_class {
     private String cityName;
     private int population;
     private String country;
+    Database db;
 
     public city_class(String cityName, int population, String country) {
         this.cityName = cityName;
