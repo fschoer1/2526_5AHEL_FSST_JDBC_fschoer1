@@ -2,6 +2,8 @@ package org.example.jdbcdatenvisualisierung;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import java.sql.*;
+
 
 public class HelloController {
     @FXML
