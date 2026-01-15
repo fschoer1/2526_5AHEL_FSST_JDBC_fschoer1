@@ -13,9 +13,7 @@ public class HelloController {
     }
 
 
-    String getWelcomeText() {
-        return welcomeText.getText();
-    }
+
 
 }
 
