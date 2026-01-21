@@ -12,7 +12,11 @@ public class CityRepository {
 
         Connection conn = Database.connect();
 
-        String sql = "SELECT name, population, countrycode FROM city";
+        String sql = "SELECT name, population, countrycode FROM city ORDER BY population ASC";
+
+
+
+
 
         PreparedStatement stmt = conn.prepareStatement(sql);
         ResultSet rs = stmt.executeQuery();
