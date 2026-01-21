@@ -1,19 +1,41 @@
 package org.example.jdbcdatenvisualisierung;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-import java.io.IOException;
+import java.util.List;
 
 public class HelloApplication extends Application {
+
     @Override
-    public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        stage.setTitle("Hello!");
+    public void start(Stage stage) throws Exception {
+
+        CityRepository cityRepository = new CityRepository();
+
+        List<city_class> cities = cityRepository.getAllCities();
+
+
+
+        PieChart pieChart = new PieChart();
+        pieChart.setTitle("Städte nach Größe");
+
+        pieChart.getData().add(new PieChart.Data("<100k", 81.45)); // letzter Parameter zu skalieren
+        pieChart.getData().add(new PieChart.Data("100k–1M", 12.72));
+        pieChart.getData().add(new PieChart.Data(">1M", 5.83));
+
+        StackPane root = new StackPane(pieChart);
+        Scene scene = new Scene(root, 600, 400);
+
+
         stage.setScene(scene);
+        stage.setTitle("PieChart Demo");
         stage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
     }
 }
