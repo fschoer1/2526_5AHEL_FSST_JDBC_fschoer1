@@ -16,6 +16,8 @@ import java.util.List;
 //    Grenzen geben (20k, 50k, 100k, 1M, 5M, 10M etc.)  und die Diagramme müssen sich entsprechend anpassen
 public class CityRepository {
 
+
+
     public List<CityGroup> getAllCities() throws Exception {
 
         Connection conn = Database.connect();
