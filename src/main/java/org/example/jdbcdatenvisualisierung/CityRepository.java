@@ -6,6 +6,14 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+// TODO: Laden aller Städte mit ihrer Einwohnerzahl in einer Collection
+//   Die Anzahl pro Gruppe  - die Gruppierung - erfolgt in einer Methode deren Rückgabewert  List<CityGroup>   ist
+//   die Gruppendefinition (100000,1000000)  wird über eine INT-Collectin übergeben
+//   die Collection muss aufsteigend sortiert sein - wenn nicht -> Exception
+//
+
+// TODO: GUI erweitern, sodass auch Grenzen ausgewählt werden können. dh. es muss Checkboxen für die
+//    Grenzen geben (20k, 50k, 100k, 1M, 5M, 10M etc.)  und die Diagramme müssen sich entsprechend anpassen
 public class CityRepository {
 
     public List<CityGroup> getAllCities() throws Exception {
@@ -22,11 +30,6 @@ public class CityRepository {
                         "FROM city " +
                         "GROUP BY population_class " +
                         "ORDER BY city_count ASC";
-
-
-
-
-
 
         PreparedStatement stmt = conn.prepareStatement(sql);
         ResultSet rs = stmt.executeQuery();
