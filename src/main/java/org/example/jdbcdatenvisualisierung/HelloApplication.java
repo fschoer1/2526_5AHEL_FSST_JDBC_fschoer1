@@ -15,16 +15,17 @@ public class HelloApplication extends Application {
 
         CityRepository cityRepository = new CityRepository();
 
-        List<city_class> cities = cityRepository.getAllCities();
+        List<CityGroup> groups = cityRepository.getAllCities();
 
 
 
         PieChart pieChart = new PieChart();
         pieChart.setTitle("Städte nach Größe");
 
-        pieChart.getData().add(new PieChart.Data("<100k", 81.45)); // letzter Parameter zu skalieren
-        pieChart.getData().add(new PieChart.Data("100k–1M", 12.72));
-        pieChart.getData().add(new PieChart.Data(">1M", 5.83));
+        pieChart.getData().add(new PieChart.Data("<100k", groups.get(1).getCityCount())); // letzter Parameter zu skalieren
+        pieChart.getData().add(new PieChart.Data("100k–1M", groups.get(2).getCityCount()));
+        pieChart.getData().add(new PieChart.Data(">1M", groups.get(0).getCityCount()));
+
 
         StackPane root = new StackPane(pieChart);
         Scene scene = new Scene(root, 600, 400);

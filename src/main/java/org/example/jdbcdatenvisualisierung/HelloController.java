@@ -12,15 +12,16 @@ public class HelloController {
 
     CityRepository cityRepository = new CityRepository();
 
-    List<city_class> cities = cityRepository.getAllCities();
+    List<CityGroup> groups = cityRepository.getAllCities();
 
     public HelloController() throws Exception {
+        welcomeText.setText(groups.get(0).getPopulationClass());
     }
 
 
     @FXML
     protected void onHelloButtonClick() {
-        welcomeText.setText(cities.get(9).getCityName());
+        welcomeText.setText(groups.get(0).getPopulationClass());
     }
 
 

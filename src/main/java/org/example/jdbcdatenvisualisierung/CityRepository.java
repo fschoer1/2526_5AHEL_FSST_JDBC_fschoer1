@@ -8,11 +8,21 @@ import java.util.List;
 
 public class CityRepository {
 
-    public List<city_class> getAllCities() throws Exception {
+    public List<CityGroup> getAllCities() throws Exception {
 
         Connection conn = Database.connect();
 
-        String sql = "SELECT name, population, countrycode FROM city ORDER BY population ASC";
+        String sql =
+                "SELECT " +
+                        "CASE " +
+                        "WHEN population < 100000 THEN '<100k' " +
+                        "WHEN population BETWEEN 100000 AND 999999 THEN '100k-1M' " +
+                        "ELSE '>1M' END AS population_class, " +
+                        "COUNT(*) AS city_count " +
+                        "FROM city " +
+                        "GROUP BY population_class " +
+                        "ORDER BY city_count ASC";
+
 
 
 
@@ -21,20 +31,20 @@ public class CityRepository {
         PreparedStatement stmt = conn.prepareStatement(sql);
         ResultSet rs = stmt.executeQuery();
 
-        List<city_class> cities = new ArrayList<>();
+        List<CityGroup> groups = new ArrayList<>();
 
         while (rs.next()) {
-            String name = rs.getString("name");
-            int population = rs.getInt("population");
-            String country = rs.getString("countrycode");
+            String populationClass = rs.getString("population_class");
+            int cityCount = rs.getInt("city_count");
 
-            cities.add(new city_class(name, population, country));
+            groups.add(new CityGroup(populationClass, cityCount));
         }
+
 
         rs.close();
         stmt.close();
         conn.close();
 
-        return cities;
+        return groups;
     }
 }
